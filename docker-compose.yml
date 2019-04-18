@@ -34,7 +34,6 @@ services:
   python:
     image: python:3.7
     command: bash
-    commmand: "cd /app && make pip-install"
     volumes:
       - ./app:/app
 
