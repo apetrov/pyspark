@@ -19,3 +19,16 @@ services:
     environment:
       PORT: 3030
 
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    volumes:
+      - .:/data
+    links:
+      - master
+    environment:
+      PORT: 3030
+      SPARK_MASTER: "spark://master:7077"
+
+
