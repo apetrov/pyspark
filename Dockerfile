@@ -15,6 +15,9 @@ RUN tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 RUN mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark
 RUN rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 
+# no idea why:
+# https://github.com/big-data-europe/docker-spark/blob/master/base/Dockerfile#L34
+ENV PYTHONHASHSEED 1
 
 #RUN apt-get update && apt-get install -y graphviz default-libmysqlclient-dev
 

@@ -1,17 +1,21 @@
 version: '3.5'
 
 services:
-  pyspark:
+  base:
     build:
       context: .
       dockerfile: Dockerfile
+
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile.master
     ports:
-      - 3242:3030
+      - 8083:8080
+      - 7077:7077
+      - 6066:6066
     volumes:
       - .:/data
-    stdin_open: true
-    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
-    tty: true
-    command: sleep 900
-    environment: &app_env
+    environment:
       PORT: 3030
+
