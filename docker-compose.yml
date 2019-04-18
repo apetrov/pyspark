@@ -31,4 +31,28 @@ services:
       PORT: 3030
       SPARK_MASTER: "spark://master:7077"
 
+  python:
+    image: python:3.7
+    command: bash
+    commmand: "cd /app && make pip-install"
+    volumes:
+      - ./app:/app
+
+  submit:
+    build:
+      context: .
+      dockerfile: Dockerfile.pysubmit
+    volumes:
+      - ./app/:/code
+    links:
+      - master
+      - worker
+    environment:
+      PORT: 3030
+      SPARK_MASTER: "spark://master:7077"
+      BUILD_HOME: "/code/dist"
+      SPARK_CODE: "jobs.zip main.py"
+      SPARK_JOB: "wordcount"
+
+
 
